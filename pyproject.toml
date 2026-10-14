@@ -1,0 +1,40 @@
+[project]
+name = "smolvla-tuning"
+version = "0.1.0"
+description = "Fine-tuning SmolVLA on MuJoCo pick-and-place manipulation task using LeRobot"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "gymnasium>=1.4.0",
+    "imageio[ffmpeg]>=2.38.1",
+    "lerobot>=0.6.1",
+    "matplotlib>=3.11.2",
+    "mujoco>=3.15.0",
+    "numpy>=2.2.6",
+    "opencv-python>=5.0.0.93",
+    "torch>=2.11.0",
+    "torchvision>=0.26.0",
+    "tqdm>=4.70.1",
+]
+
+[project.scripts]
+smolvla-tuning = "smolvla_tuning:main"
+
+[build-system]
+requires = ["uv_build>=0.13.1,<0.14.0"]
+build-backend = "uv_build"
+
+[[tool.uv.index]]
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
+default = true
+
+# Configure custom PyTorch index for CUDA 12.8 wheels
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+# Route torch and torchvision to the explicit CUDA 12.8 repository
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+torchvision = { index = "pytorch-cu128" }
