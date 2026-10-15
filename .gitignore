@@ -1,1 +1,7 @@
 __pycache__
+
+typings
+data
+outputs
+*.mp4
+*.zarr
