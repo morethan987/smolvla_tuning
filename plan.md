@@ -60,16 +60,19 @@ smolvla_tuning/
 在云端 Linux 终端中运行：
 
 ```bash
-# 1. 声明无头 GPU 渲染（每次打开终端必配，可写入 ~/.bashrc）
+# 声明无头 GPU 渲染（每次打开终端必配，可写入 ~/.bashrc）
 export MUJOCO_GL=egl
 
-# 2. 一键同步并安装全部依赖
+# 一键同步并安装全部依赖
 uv sync
 
-# 3. Generate mujoco typing binding to avoid LSP errors
+# Install egl dependency
+sudo apt update && sudo apt install -y libegl1 libegl-dev libgl1-mesa-dev
+
+# Generate mujoco typing binding to avoid LSP errors
 uv run --with pybind11-stubgen pybind11-stubgen mujoco -o typings
 
-# 4. 验证 GPU、PyTorch 与 MuJoCo
+# 验证 GPU、PyTorch 与 MuJoCo
 uv run python -c "
 import torch, mujoco
 print('PyTorch CUDA:', torch.cuda.is_available(), '| GPU:', torch.cuda.get_device_name(0))
