@@ -8,15 +8,12 @@
   D. 成功判定: 把方块放进托盘 → 2s 后 terminated=True
   E. 图像观测(需 OpenGL; 无 GPU 环境会给出提示后跳过)
 
-运行: uv run python scripts/01_test_env.py
+运行: uv run scripts/test_env.py
 """
 
-import sys
 from pathlib import Path
 
 import numpy as np
-
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from smolvla_tuning.envs import PickPlaceEnv
 

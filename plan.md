@@ -42,11 +42,11 @@ smolvla_tuning/
 │           ├── __init__.py
 │           └── visualizer.py
 ├── scripts/                          # 5 步流水线可执行脚本
-│   ├── 01_test_env.py                # 步骤1：环境渲染与动作通断测试
-│   ├── 02_collect_data.py            # 步骤2：自动化采集示教数据
-│   ├── 03_inspect_dataset.py         # 步骤3：回放数据、提取统计量
-│   ├── 04_train.py                   # 步骤4：调用 LeRobot 微调 SmolVLA
-│   └── 05_evaluate.py                # 步骤5：50 种子闭环评测与录制视频
+│   ├── test_env.py                # 步骤1：环境渲染与动作通断测试
+│   ├── collect_data.py            # 步骤2：自动化采集示教数据
+│   ├── inspect_dataset.py         # 步骤3：回放数据、提取统计量
+│   ├── train.py                   # 步骤4：调用 LeRobot 微调 SmolVLA
+│   └── evaluate.py                # 步骤5：50 种子闭环评测与录制视频
 ├── data/                             # 【大文件】存放转换好的 LeRobot 数据集
 └── outputs/                          # 【大文件】存放模型 checkpoint 权重、日志和评测视频
 ```
@@ -101,7 +101,7 @@ ls -a typings/mujoco
    * 检测方块高度与托盘水平范围，若释放后在托盘边界内静止超过 2 秒即返回 `success=True, terminated=True`。
    * 单步步数达到 30 秒（对应步数如 600~900 步）标记超时终止。
 
-> **联调验证**：运行 `uv run python scripts/01_test_env.py`，随机发几个随机动作，用 `imageio.imwrite` 存一张第一帧图像，在本地打开查看画面是否正常。
+> **联调验证**：运行 `uv run python scripts/test_env.py`，随机发几个随机动作，用 `imageio.imwrite` 存一张第一帧图像，在本地打开查看画面是否正常。
 
 ---
 
@@ -118,7 +118,7 @@ PPT 要求采集 **100 条成功轨迹**（80 训练 / 20 验证）：
     4. **Lift**：垂直抬高 15cm。
     5. **Move-to-Tray**：平移至托盘正上方。
     6. **Release**：夹爪张开，方块落入托盘，稳定等待。
-* 运行 `02_collect_data.py` 循环 100 次不同方块初始位置，自动过滤掉失败案例，把这 100 条成功轨迹存成中间数据或直接封装为 `LeRobotDataset`。
+* 运行 `collect_data.py` 循环 100 次不同方块初始位置，自动过滤掉失败案例；运行 `inspect_dataset.py` 进行可视化抽检；把这 100 条成功轨迹存成中间数据或直接封装为 `LeRobotDataset`。
 
 ---
 
