@@ -7,11 +7,12 @@ requires-python = ">=3.12"
 dependencies = [
     "gymnasium>=1.4.0",
     "imageio[ffmpeg]>=2.38.1",
-    "lerobot>=0.6.1",
+    "lerobot[dataset,smolvla,training]>=0.6.1",
     "matplotlib>=3.11.2",
     "mujoco>=3.15.0",
     "numpy>=2.2.6",
     "opencv-python>=5.0.0.93",
+    "socksio>=1.0.0",
     "torch>=2.11.0",
     "torchvision>=0.26.0",
     "tqdm>=4.70.1",
@@ -25,7 +26,7 @@ requires = ["uv_build>=0.13.0,<0.14.0"]
 build-backend = "uv_build"
 
 [[tool.uv.index]]
-url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
+url = "https://mirrors.aliyun.com/pypi/simple/"
 default = true
 
 # Configure custom PyTorch index for CUDA 12.8 wheels
